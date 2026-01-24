@@ -1,0 +1,13 @@
+User Uploads Insurance PDF/Image
+            ↓
+OCR (Extract Raw Text)
+            ↓
+Chunk the policy into clauses
+            ↓
+Embed policy chunks
+            ↓
+Retrieve relevant law clauses (RAG)
+            ↓
+LLM reasoning (semantic comparison)
+            ↓
+Compliance assessment + explanation
