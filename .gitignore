@@ -19,7 +19,3 @@ Thumbs.db
 
 # FAISS / cache
 *.index
-cd e:\Insurance_new\Insurance-Document-Analyzer
-git rm -r --cached venv/
-git commit -m "Remove virtual environment from tracking"
-git add .

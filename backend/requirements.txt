@@ -11,10 +11,6 @@ PyMuPDF
 sentence-transformers
 faiss-cpu
 
-openai
-langchain
-langchain-community
-langchain-openai
 
 requests
 python-dotenv

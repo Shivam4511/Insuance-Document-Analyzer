@@ -26,21 +26,18 @@ def extract_text_from_pdf(file_bytes: bytes) -> str:
     full_text=""
 
     for page in doc:
-        text=page.get_text("text")
+        text = page.get_text("text")
 
         if text.strip():
-            full_text+=text+"\n"
-        
+            full_text += text + "\n"
         else:
+            pix = page.get_pixmap()
+            img_bytes = pix.tobytes("png")
+            img = Image.open(io.BytesIO(img_bytes))
+            full_text += extract_text_from_image(img) + "\n"
 
-            pix=page.get_pixmap()
-            img_bytes=pix.tobytes("png")
-            img=Image.open(io.BytesIO(img_bytes))
-
-            full_text+=extract_text_from_image(img) + "\n"
-        
-
-        return clean_text(full_text)
+    # return after processing all pages
+    return clean_text(full_text)
     
 
 
@@ -86,23 +83,25 @@ def preprocess_image(img: np.ndarray) -> np.ndarray:
 
     """
 
-    # convert to grayscale
-    gray=cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+    # convert to grayscale (handle both color and grayscale images)
+    if len(img.shape) == 3:
+        gray=cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+    else:
+        gray = img
 
     # Denoising
     gray=cv2.medianBlur(gray, 3)
 
-    # Adaptive Thresholding(better for gird layouts)
-    thresh=cv2.AdaptiveThreshold(
+    # Adaptive Thresholding (better for grid layouts)
+    thresh = cv2.adaptiveThreshold(
         gray, 255,
         cv2.ADAPTIVE_THRESH_GAUSSIAN_C,
         cv2.THRESH_BINARY,
-        15,3
-
+        15, 3
     )
 
-    kernel=np.ones((2,2), np.unit8)
-    thresh=cv2.morphologyEx(thresh, cv2.MORPH_CLOSE, kernel)
+    kernel = np.ones((2,2), np.uint8)
+    thresh = cv2.morphologyEx(thresh, cv2.MORPH_CLOSE, kernel)
 
     return thresh
 
@@ -124,7 +123,7 @@ def clean_text(text: str) -> str:
     text=re.sub(r"[^\x00-\x7F]+"," ",text)
 
     # Fix Broken Lines
-    text=re.sub("\n"," ")
+    text=re.sub("\n", " ", text)
 
     # Normalizing spacing
 

@@ -1,0 +1,284 @@
+/* ==================== CUSTOM PROPERTIES ==================== */
+:root {
+    --gauge-color: #2b6cb0;
+    --shadow-card: 0 1px 3px rgba(16, 42, 67, 0.06), 0 1px 2px rgba(16, 42, 67, 0.04);
+    --shadow-card-hover: 0 10px 25px rgba(16, 42, 67, 0.08), 0 4px 10px rgba(16, 42, 67, 0.05);
+}
+
+/* ==================== SMOOTH SCROLL ==================== */
+html {
+    scroll-behavior: smooth;
+}
+
+/* ==================== BASE RESETS ==================== */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* ==================== ANIMATIONS ==================== */
+
+/* Fade in */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.animate-fade-in {
+    animation: fadeIn 0.6s ease-out both;
+}
+
+/* Fade in + slide up */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-fade-in-up {
+    animation: fadeInUp 0.7s ease-out both;
+}
+
+/* Staggered children — results cards */
+.result-card {
+    opacity: 0;
+    animation: fadeInUp 0.5s ease-out forwards;
+}
+
+.result-card:nth-child(1) {
+    animation-delay: 0.05s;
+}
+
+.result-card:nth-child(2) {
+    animation-delay: 0.12s;
+}
+
+.result-card:nth-child(3) {
+    animation-delay: 0.19s;
+}
+
+/* ==================== UPLOAD ZONE ==================== */
+
+.upload-zone.drag-over {
+    border-color: #2b6cb0;
+    background-color: #ebf8ff;
+    box-shadow: 0 0 0 4px rgba(43, 108, 176, 0.1);
+}
+
+.upload-zone.drag-over .upload-icon-container {
+    transform: scale(1.15);
+}
+
+/* Pulse ring on drag-over */
+@keyframes pulse-ring {
+    0% {
+        box-shadow: 0 0 0 0 rgba(43, 108, 176, 0.25);
+    }
+
+    70% {
+        box-shadow: 0 0 0 12px rgba(43, 108, 176, 0);
+    }
+
+    100% {
+        box-shadow: 0 0 0 0 rgba(43, 108, 176, 0);
+    }
+}
+
+.upload-zone.drag-over {
+    animation: pulse-ring 1.5s ease-out infinite;
+}
+
+/* ==================== RESULT CARDS HOVER ==================== */
+
+.result-card {
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.result-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-card-hover);
+}
+
+/* ==================== CONFIDENCE GAUGE ==================== */
+
+.gauge-progress {
+    transition: stroke-dasharray 1.2s ease-out;
+}
+
+/* ==================== STATUS BADGES ==================== */
+
+.status-badge-compliant {
+    background-color: #f0fff4;
+    color: #22543d;
+    border: 1px solid #c6f6d5;
+}
+
+.status-badge-noncompliant {
+    background-color: #fff5f5;
+    color: #9b2c2c;
+    border: 1px solid #fed7d7;
+}
+
+.status-badge-insufficient {
+    background-color: #fefcbf;
+    color: #744210;
+    border: 1px solid #fefcbf;
+}
+
+/* ==================== SEVERITY BADGES ==================== */
+
+.severity-high {
+    background-color: #fff5f5;
+    color: #c53030;
+    border: 1px solid #feb2b2;
+}
+
+.severity-medium {
+    background-color: #fffaf0;
+    color: #c05621;
+    border: 1px solid #fbd38d;
+}
+
+.severity-low {
+    background-color: #f0fff4;
+    color: #276749;
+    border: 1px solid #c6f6d5;
+}
+
+/* ==================== SECTION STATUS DOTS ==================== */
+
+.section-dot-compliant {
+    background-color: #48bb78;
+}
+
+.section-dot-noncompliant {
+    background-color: #fc8181;
+}
+
+.section-dot-insufficient {
+    background-color: #ecc94b;
+}
+
+/* ==================== LOADING SPINNER ==================== */
+
+.loading-spinner {
+    width: 48px;
+    height: 48px;
+    border: 4px solid #e2e8f0;
+    border-top-color: #2b6cb0;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Pipeline dots animation */
+.pipeline-dot {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #90cdf4;
+    animation: pipeline-bounce 1.2s ease-in-out infinite;
+}
+
+@keyframes pipeline-bounce {
+
+    0%,
+    80%,
+    100% {
+        transform: scale(0.6);
+        opacity: 0.4;
+    }
+
+    40% {
+        transform: scale(1);
+        opacity: 1;
+        background-color: #2b6cb0;
+    }
+}
+
+/* ==================== ACCORDION ==================== */
+
+.accordion-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.35s ease, padding 0.35s ease;
+}
+
+.accordion-content.open {
+    max-height: 600px;
+    padding-top: 0.75rem;
+    padding-bottom: 1rem;
+}
+
+.accordion-chevron {
+    transition: transform 0.3s ease;
+}
+
+.accordion-chevron.open {
+    transform: rotate(180deg);
+}
+
+/* ==================== FLAGGED CLAUSE ROW HOVER ==================== */
+
+.clause-row {
+    transition: background-color 0.2s ease;
+}
+
+.clause-row:hover {
+    background-color: #f7fafc;
+}
+
+/* ==================== RESPONSIVE TWEAKS ==================== */
+
+@media (max-width: 640px) {
+    .gauge-container {
+        width: 100px;
+        height: 100px;
+    }
+}
+
+/* ==================== HEADER SCROLL SHADOW ==================== */
+
+.header-scrolled {
+    box-shadow: 0 2px 12px rgba(16, 42, 67, 0.08);
+}
+
+/* ==================== SCROLLBAR STYLING ==================== */
+
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f0f4f8;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #bcccdc;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #829ab1;
+}

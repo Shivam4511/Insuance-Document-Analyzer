@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="AI-powered Insurance Document Analyzer — Upload your motor insurance policy to check compliance with Indian regulations, flag unfair clauses, and get actionable insights.">
+    <title>Insurance Document Analyzer | AI-Powered Compliance Check</title>
+
+    <!-- Google Fonts — Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Tailwind CSS v3 CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                    colors: {
+                        navy: {
+                            50: '#f0f4f8',
+                            100: '#d9e2ec',
+                            200: '#bcccdc',
+                            300: '#9fb3c8',
+                            400: '#829ab1',
+                            500: '#627d98',
+                            600: '#486581',
+                            700: '#334e68',
+                            800: '#243b53',
+                            900: '#102a43',
+                        },
+                        trust: {
+                            50: '#ebf8ff',
+                            100: '#bee3f8',
+                            200: '#90cdf4',
+                            300: '#63b3ed',
+                            400: '#4299e1',
+                            500: '#2b6cb0',
+                            600: '#2c5282',
+                            700: '#1a365d',
+                        },
+                    },
+                },
+            },
+        }
+    </script>
+
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="min-h-screen bg-navy-50 font-sans text-navy-900">
+
+    <!-- ==================== HEADER ==================== -->
+    <header
+        class="bg-white/80 backdrop-blur-md border-b border-navy-100 sticky top-0 z-50 transition-shadow duration-300"
+        id="main-header">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <!-- Shield + Document Icon -->
+                <div class="relative w-10 h-10 flex items-center justify-center">
+                    <svg class="w-10 h-10 text-trust-500" viewBox="0 0 40 40" fill="none">
+                        <path d="M20 3L5 10V19C5 28.94 11.4 38.22 20 40C28.6 38.22 35 28.94 35 19V10L20 3Z"
+                            fill="currentColor" fill-opacity="0.12" stroke="currentColor" stroke-width="2"
+                            stroke-linejoin="round" />
+                        <path d="M15 20L18.5 23.5L26 16" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                    </svg>
+                </div>
+                <div>
+                    <h1 class="text-lg sm:text-xl font-bold text-navy-800 leading-tight">Insurance Document Analyzer
+                    </h1>
+                    <p class="text-xs text-navy-400 font-medium hidden sm:block">AI-Powered Compliance Assessment</p>
+                </div>
+            </div>
+            <span
+                class="hidden md:inline-flex items-center gap-1.5 px-3 py-1.5 bg-trust-50 text-trust-600 text-xs font-semibold rounded-full border border-trust-100">
+                <span class="w-2 h-2 bg-trust-400 rounded-full animate-pulse"></span>
+                RAG Pipeline Active
+            </span>
+        </div>
+    </header>
+
+    <!-- ==================== LANDING: HERO ==================== -->
+    <section class="relative overflow-hidden bg-gradient-to-br from-navy-900 via-trust-700 to-navy-800 text-white">
+        <!-- Subtle grid pattern overlay -->
+        <div class="absolute inset-0 opacity-[0.04]"
+            style="background-image: url('data:image/svg+xml,%3Csvg width=&quot;60&quot; height=&quot;60&quot; viewBox=&quot;0 0 60 60&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot;%3E%3Cg fill=&quot;none&quot; fill-rule=&quot;evenodd&quot;%3E%3Cg fill=&quot;%23ffffff&quot; fill-opacity=&quot;1&quot;%3E%3Cpath d=&quot;M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z&quot;/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');">
+        </div>
+
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 py-20 md:py-28 relative z-10">
+            <div class="max-w-3xl mx-auto text-center animate-fade-in">
+                <!-- Badge -->
+                <div
+                    class="inline-flex items-center gap-2 px-4 py-1.5 mb-6 bg-white/10 backdrop-blur-sm rounded-full border border-white/20 text-sm font-medium">
+                    <svg class="w-4 h-4 text-amber-300" fill="currentColor" viewBox="0 0 20 20">
+                        <path
+                            d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                    </svg>
+                    AI-Powered Compliance Analysis
+                </div>
+
+                <!-- Main heading -->
+                <h2 class="text-4xl sm:text-5xl md:text-6xl font-extrabold leading-tight mb-6">
+                    Don't Sign Before
+                    <span class="block mt-1 text-transparent bg-clip-text bg-gradient-to-r from-sky-300 to-blue-200">
+                        You Understand
+                    </span>
+                </h2>
+
+                <!-- Problem statement -->
+                <p class="text-lg sm:text-xl text-blue-100/90 leading-relaxed max-w-2xl mx-auto mb-4">
+                    Millions of Indian policyholders sign motor insurance documents containing
+                    <strong class="text-white">unfair clauses</strong>,
+                    <strong class="text-white">hidden exclusions</strong>, and
+                    <strong class="text-white">non-compliant terms</strong> — without ever knowing.
+                </p>
+                <p class="text-base text-blue-200/70 leading-relaxed max-w-2xl mx-auto mb-10">
+                    Our AI cross-references your policy against the <strong class="text-blue-100">Motor Vehicles Act
+                        1988</strong>
+                    and <strong class="text-blue-100">IRDAI regulations</strong> to flag what matters — in seconds, not
+                    hours.
+                </p>
+
+                <!-- CTA -->
+                <a href="#upload-section"
+                    class="inline-flex items-center gap-2 px-8 py-4 bg-white text-trust-700 font-bold rounded-xl shadow-lg hover:shadow-xl hover:bg-blue-50 transition-all duration-300 text-base group">
+                    Analyze Your Document
+                    <svg class="w-5 h-5 transition-transform duration-300 group-hover:translate-y-0.5" fill="none"
+                        viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                        <path d="M19 14l-7 7m0 0l-7-7m7 7V3" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                </a>
+            </div>
+        </div>
+
+        <!-- Gradient fade to body -->
+        <div class="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-navy-50 to-transparent"></div>
+    </section>
+
+    <!-- ==================== LANDING: HOW IT WORKS ==================== -->
+    <section class="bg-navy-50 py-16 md:py-20">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6">
+            <div class="text-center mb-12 animate-fade-in">
+                <p class="text-trust-500 font-semibold text-sm uppercase tracking-wider mb-2">Under The Hood</p>
+                <h3 class="text-3xl sm:text-4xl font-extrabold text-navy-800">How It Works</h3>
+                <p class="text-navy-500 mt-3 max-w-xl mx-auto">A 4-stage RAG pipeline that combines OCR, semantic
+                    search, and LLM reasoning to deliver actionable compliance insights.</p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Step 1 -->
+                <div
+                    class="pipeline-step bg-white rounded-2xl border border-navy-100 p-6 text-center shadow-sm relative">
+                    <div
+                        class="step-number absolute -top-3 left-1/2 -translate-x-1/2 w-7 h-7 bg-trust-500 text-white text-xs font-bold rounded-full flex items-center justify-center shadow">
+                        1</div>
+                    <div class="w-14 h-14 mx-auto mb-4 bg-sky-50 rounded-xl flex items-center justify-center">
+                        <svg class="w-7 h-7 text-sky-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                            stroke-width="1.5">
+                            <path
+                                d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"
+                                stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                    </div>
+                    <h4 class="font-bold text-navy-700 mb-1">OCR Extraction</h4>
+                    <p class="text-xs text-navy-400 leading-relaxed">Extracts text from PDFs and images using PyMuPDF +
+                        Tesseract with table-aware preprocessing</p>
+                </div>
+
+                <!-- Step 2 -->
+                <div
+                    class="pipeline-step bg-white rounded-2xl border border-navy-100 p-6 text-center shadow-sm relative">
+                    <div
+                        class="step-number absolute -top-3 left-1/2 -translate-x-1/2 w-7 h-7 bg-trust-500 text-white text-xs font-bold rounded-full flex items-center justify-center shadow">
+                        2</div>
+                    <div class="w-14 h-14 mx-auto mb-4 bg-violet-50 rounded-xl flex items-center justify-center">
+                        <svg class="w-7 h-7 text-violet-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                            stroke-width="1.5">
+                            <path d="M4 6h16M4 12h16m-7 6h7" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                    </div>
+                    <h4 class="font-bold text-navy-700 mb-1">Smart Chunking</h4>
+                    <p class="text-xs text-navy-400 leading-relaxed">Splits documents into semantically meaningful
+                        sections based on insurance-specific headings</p>
+                </div>
+
+                <!-- Step 3 -->
+                <div
+                    class="pipeline-step bg-white rounded-2xl border border-navy-100 p-6 text-center shadow-sm relative">
+                    <div
+                        class="step-number absolute -top-3 left-1/2 -translate-x-1/2 w-7 h-7 bg-trust-500 text-white text-xs font-bold rounded-full flex items-center justify-center shadow">
+                        3</div>
+                    <div class="w-14 h-14 mx-auto mb-4 bg-emerald-50 rounded-xl flex items-center justify-center">
+                        <svg class="w-7 h-7 text-emerald-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                            stroke-width="1.5">
+                            <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" stroke-linecap="round"
+                                stroke-linejoin="round" />
+                        </svg>
+                    </div>
+                    <h4 class="font-bold text-navy-700 mb-1">RAG Retrieval</h4>
+                    <p class="text-xs text-navy-400 leading-relaxed">Finds relevant Indian insurance laws using FAISS
+                        vector search + sentence transformer embeddings</p>
+                </div>
+
+                <!-- Step 4 -->
+                <div
+                    class="pipeline-step bg-white rounded-2xl border border-navy-100 p-6 text-center shadow-sm relative">
+                    <div
+                        class="step-number absolute -top-3 left-1/2 -translate-x-1/2 w-7 h-7 bg-trust-500 text-white text-xs font-bold rounded-full flex items-center justify-center shadow">
+                        4</div>
+                    <div class="w-14 h-14 mx-auto mb-4 bg-amber-50 rounded-xl flex items-center justify-center">
+                        <svg class="w-7 h-7 text-amber-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                            stroke-width="1.5">
+                            <path
+                                d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"
+                                stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                    </div>
+                    <h4 class="font-bold text-navy-700 mb-1">LLM Reasoning</h4>
+                    <p class="text-xs text-navy-400 leading-relaxed">Groq-hosted Llama 3.1 assesses compliance with
+                        strict JSON output and hallucination filtering</p>
+                </div>
+            </div>
+
+            <!-- Connector arrows (desktop only) -->
+            <div class="hidden lg:flex justify-center items-center gap-0 mt-[-120px] mb-[80px] pointer-events-none">
+                <div class="w-[calc(25%-1.5rem)]"></div>
+                <svg class="w-8 h-8 text-navy-200" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                    stroke-width="2">
+                    <path d="M9 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+                <div class="w-[calc(25%-1.5rem)]"></div>
+                <svg class="w-8 h-8 text-navy-200" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                    stroke-width="2">
+                    <path d="M9 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+                <div class="w-[calc(25%-1.5rem)]"></div>
+                <svg class="w-8 h-8 text-navy-200" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                    stroke-width="2">
+                    <path d="M9 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+                <div class="w-[calc(25%-1.5rem)]"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== LANDING: KEY FEATURES ==================== -->
+    <section class="bg-white py-16 md:py-20 border-t border-navy-100">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6">
+            <div class="text-center mb-12 animate-fade-in">
+                <p class="text-trust-500 font-semibold text-sm uppercase tracking-wider mb-2">Why This Matters</p>
+                <h3 class="text-3xl sm:text-4xl font-extrabold text-navy-800">Key Features</h3>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+                <!-- Feature 1 -->
+                <div
+                    class="feature-card flex gap-4 p-6 rounded-2xl border border-navy-100 hover:border-trust-200 transition-all duration-300 hover:shadow-md group">
+                    <div
+                        class="w-12 h-12 flex-shrink-0 bg-red-50 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                        <svg class="w-6 h-6 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                            stroke-width="1.5">
+                            <path
+                                d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
+                                stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-navy-700 mb-1">Unfair Clause Detection</h4>
+                        <p class="text-sm text-navy-400 leading-relaxed">Flags problematic clauses with severity ratings
+                            (High / Medium / Low) and explains exactly why each one is harmful to the policyholder.</p>
+                    </div>
+                </div>
+
+                <!-- Feature 2 -->
+                <div
+                    class="feature-card flex gap-4 p-6 rounded-2xl border border-navy-100 hover:border-trust-200 transition-all duration-300 hover:shadow-md group">
+                    <div
+                        class="w-12 h-12 flex-shrink-0 bg-emerald-50 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                        <svg class="w-6 h-6 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                            stroke-width="1.5">
+                            <path
+                                d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
+                                stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-navy-700 mb-1">Hallucination Filtering</h4>
+                        <p class="text-sm text-navy-400 leading-relaxed">Every flagged clause is validated against the
+                            original document. If the LLM fabricated it, it gets filtered out automatically.</p>
+                    </div>
+                </div>
+
+                <!-- Feature 3 -->
+                <div
+                    class="feature-card flex gap-4 p-6 rounded-2xl border border-navy-100 hover:border-trust-200 transition-all duration-300 hover:shadow-md group">
+                    <div
+                        class="w-12 h-12 flex-shrink-0 bg-blue-50 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                        <svg class="w-6 h-6 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                            stroke-width="1.5">
+                            <path
+                                d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3"
+                                stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-navy-700 mb-1">Real Legal Knowledge Base</h4>
+                        <p class="text-sm text-navy-400 leading-relaxed">Cross-references against 400+ indexed clauses
+                            from the Motor Vehicles Act 1988, IRDAI Regulations, and the Motor Insurance Handbook.</p>
+                    </div>
+                </div>
+
+                <!-- Feature 4 -->
+                <div
+                    class="feature-card flex gap-4 p-6 rounded-2xl border border-navy-100 hover:border-trust-200 transition-all duration-300 hover:shadow-md group">
+                    <div
+                        class="w-12 h-12 flex-shrink-0 bg-violet-50 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                        <svg class="w-6 h-6 text-violet-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                            stroke-width="1.5">
+                            <path
+                                d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
+                                stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-navy-700 mb-1">Structured Confidence Scoring</h4>
+                        <p class="text-sm text-navy-400 leading-relaxed">AI-generated confidence scores with separate
+                            assessments for pricing fairness, legal adherence, and coverage adequacy.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== UPLOAD + RESULTS SECTION ==================== -->
+    <main class="max-w-6xl mx-auto px-4 sm:px-6 py-12 md:py-16">
+
+        <!-- Section heading for upload -->
+        <section class="text-center mb-10 animate-fade-in" id="upload-section">
+            <p class="text-trust-500 font-semibold text-sm uppercase tracking-wider mb-2">Try It Now</p>
+            <h2 class="text-3xl sm:text-4xl font-extrabold text-navy-800 mb-3">
+                Analyze Your Insurance Policy
+            </h2>
+            <p class="text-navy-500 text-base sm:text-lg max-w-2xl mx-auto leading-relaxed">
+                Upload a motor insurance document (PDF or image) and get instant compliance insights.
+            </p>
+        </section>
+
+        <!-- Upload Area -->
+        <section class="max-w-2xl mx-auto mb-12 animate-fade-in-up">
+            <div id="upload-area"
+                class="upload-zone relative bg-white border-2 border-dashed border-navy-200 rounded-2xl p-10 sm:p-14 text-center cursor-pointer transition-all duration-300 hover:border-trust-400 hover:shadow-lg group"
+                role="button" tabindex="0" aria-label="Click or drag files to upload">
+
+                <!-- Upload Icon -->
+                <div class="upload-icon-container mb-5 transition-transform duration-300 group-hover:scale-110">
+                    <svg class="w-16 h-16 mx-auto text-navy-300 group-hover:text-trust-400 transition-colors duration-300"
+                        fill="none" viewBox="0 0 64 64" stroke="currentColor" stroke-width="1.5">
+                        <path d="M32 44V20M32 20L22 30M32 20L42 30" stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M12 40V48C12 50.2 13.8 52 16 52H48C50.2 52 52 50.2 52 48V40" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                    </svg>
+                </div>
+
+                <p class="text-navy-700 font-semibold text-lg mb-1">
+                    Drag & drop your document here
+                </p>
+                <p class="text-navy-400 text-sm mb-5">or <span
+                        class="text-trust-500 font-medium underline underline-offset-2">click to browse</span></p>
+                <p class="text-navy-300 text-xs">Supports: PDF, PNG, JPG, JPEG, TIFF</p>
+
+                <!-- Hidden file input -->
+                <input type="file" id="file-input" accept=".pdf,.png,.jpg,.jpeg,.tiff,.tif" class="hidden">
+            </div>
+
+            <!-- File selected indicator -->
+            <div id="file-selected"
+                class="hidden mt-4 bg-white rounded-xl border border-navy-100 px-5 py-4 flex items-center justify-between shadow-sm animate-fade-in">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 bg-trust-50 rounded-lg flex items-center justify-center">
+                        <svg class="w-5 h-5 text-trust-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                            stroke-width="2">
+                            <path
+                                d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                                stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                    </div>
+                    <div>
+                        <p id="file-name" class="text-sm font-semibold text-navy-700"></p>
+                        <p id="file-size" class="text-xs text-navy-400"></p>
+                    </div>
+                </div>
+                <button id="remove-file" class="text-navy-400 hover:text-red-500 transition-colors p-1"
+                    aria-label="Remove file">
+                    <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path d="M6 18L18 6M6 6l12 12" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Analyze Button -->
+            <button id="analyze-btn"
+                class="hidden mt-5 w-full py-3.5 bg-trust-500 hover:bg-trust-600 active:bg-trust-700 text-white font-semibold rounded-xl shadow-md hover:shadow-lg transition-all duration-300 text-base animate-fade-in disabled:opacity-50 disabled:cursor-not-allowed"
+                disabled>
+                <span id="btn-text">Analyze Document</span>
+                <span id="btn-loader" class="hidden">
+                    <svg class="inline-block w-5 h-5 animate-spin mr-2" viewBox="0 0 24 24" fill="none">
+                        <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="3"
+                            stroke-dasharray="31.42 31.42" stroke-linecap="round" />
+                    </svg>
+                    Analyzing…
+                </span>
+            </button>
+        </section>
+
+        <!-- ==================== LOADING STATE ==================== -->
+        <section id="loading-section" class="hidden max-w-2xl mx-auto mb-12 text-center">
+            <div class="bg-white rounded-2xl border border-navy-100 p-10 shadow-sm">
+                <div class="loading-spinner mx-auto mb-5"></div>
+                <p class="text-navy-700 font-semibold text-lg mb-2">Analyzing your document…</p>
+                <p class="text-navy-400 text-sm">Running OCR → Chunking → RAG Retrieval → LLM Reasoning</p>
+                <div class="mt-5 flex justify-center gap-2">
+                    <span class="pipeline-dot" style="animation-delay: 0s;"></span>
+                    <span class="pipeline-dot" style="animation-delay: 0.2s;"></span>
+                    <span class="pipeline-dot" style="animation-delay: 0.4s;"></span>
+                    <span class="pipeline-dot" style="animation-delay: 0.6s;"></span>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== ERROR STATE ==================== -->
+        <section id="error-section" class="hidden max-w-2xl mx-auto mb-12 animate-fade-in">
+            <div class="bg-red-50 border border-red-200 rounded-2xl px-6 py-5 flex items-start gap-4">
+                <svg class="w-6 h-6 text-red-400 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10" />
+                    <path d="M12 8v4m0 4h.01" stroke-linecap="round" />
+                </svg>
+                <div>
+                    <p class="font-semibold text-red-700">Analysis Failed</p>
+                    <p id="error-message" class="text-sm text-red-600 mt-1"></p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== RESULTS SECTION ==================== -->
+        <section id="results-section" class="hidden animate-fade-in-up">
+
+            <!-- Result Divider -->
+            <div class="flex items-center gap-4 mb-8">
+                <div class="flex-1 h-px bg-navy-200"></div>
+                <span class="text-navy-500 font-semibold text-sm uppercase tracking-wider">Analysis Results</span>
+                <div class="flex-1 h-px bg-navy-200"></div>
+            </div>
+
+            <!-- Top Row: Confidence Gauge + Status -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-5 mb-8">
+
+                <!-- Confidence Score Gauge -->
+                <div
+                    class="result-card bg-white rounded-2xl border border-navy-100 p-6 flex flex-col items-center justify-center text-center shadow-sm col-span-1">
+                    <p class="text-xs font-semibold text-navy-400 uppercase tracking-wider mb-4">Confidence Score</p>
+                    <div class="gauge-container relative w-32 h-32 mb-3">
+                        <svg viewBox="0 0 120 120" class="w-full h-full -rotate-90">
+                            <circle cx="60" cy="60" r="50" fill="none" stroke="#e2e8f0" stroke-width="10" />
+                            <circle id="gauge-circle" cx="60" cy="60" r="50" fill="none" stroke="#2b6cb0"
+                                stroke-width="10" stroke-dasharray="0 314.16" stroke-linecap="round"
+                                class="gauge-progress" />
+                        </svg>
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <span id="gauge-value" class="text-3xl font-extrabold text-navy-800">0</span>
+                            <span class="text-navy-400 text-sm font-semibold ml-0.5">%</span>
+                        </div>
+                    </div>
+                    <p class="text-xs text-navy-400">Based on <span id="analyzed-count">0</span> of <span
+                            id="total-sections">0</span> sections</p>
+                </div>
+
+                <!-- Compliance Status -->
+                <div
+                    class="result-card bg-white rounded-2xl border border-navy-100 p-6 flex flex-col items-center justify-center text-center shadow-sm col-span-1">
+                    <p class="text-xs font-semibold text-navy-400 uppercase tracking-wider mb-4">Compliance Status</p>
+                    <div id="status-badge" class="status-badge px-5 py-2.5 rounded-full text-sm font-bold mb-3"></div>
+                    <p class="text-xs text-navy-400">Compliance Ratio: <span id="compliance-ratio"
+                            class="font-semibold text-navy-600">0.00</span></p>
+                </div>
+
+                <!-- Flagged Clauses Count -->
+                <div
+                    class="result-card bg-white rounded-2xl border border-navy-100 p-6 flex flex-col items-center justify-center text-center shadow-sm col-span-1">
+                    <p class="text-xs font-semibold text-navy-400 uppercase tracking-wider mb-4">Flagged Clauses</p>
+                    <p id="flagged-count" class="text-5xl font-extrabold text-navy-800 mb-2">0</p>
+                    <div id="severity-summary" class="flex gap-2 flex-wrap justify-center"></div>
+                </div>
+            </div>
+
+            <!-- Summary Cards Row -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-5 mb-8">
+                <!-- Pricing Assessment -->
+                <div class="result-card bg-white rounded-2xl border border-navy-100 p-6 shadow-sm">
+                    <div class="flex items-center gap-2 mb-3">
+                        <div class="w-8 h-8 rounded-lg bg-emerald-50 flex items-center justify-center">
+                            <svg class="w-4 h-4 text-emerald-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                                stroke-width="2">
+                                <path
+                                    d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                                    stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                        </div>
+                        <h3 class="font-semibold text-navy-700 text-sm">Pricing Assessment</h3>
+                    </div>
+                    <p id="pricing-text" class="text-sm text-navy-500 leading-relaxed"></p>
+                </div>
+
+                <!-- Legal Assessment -->
+                <div class="result-card bg-white rounded-2xl border border-navy-100 p-6 shadow-sm">
+                    <div class="flex items-center gap-2 mb-3">
+                        <div class="w-8 h-8 rounded-lg bg-blue-50 flex items-center justify-center">
+                            <svg class="w-4 h-4 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                                stroke-width="2">
+                                <path
+                                    d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3"
+                                    stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                        </div>
+                        <h3 class="font-semibold text-navy-700 text-sm">Legal Assessment</h3>
+                    </div>
+                    <p id="legal-text" class="text-sm text-navy-500 leading-relaxed"></p>
+                </div>
+
+                <!-- Coverage Assessment -->
+                <div class="result-card bg-white rounded-2xl border border-navy-100 p-6 shadow-sm">
+                    <div class="flex items-center gap-2 mb-3">
+                        <div class="w-8 h-8 rounded-lg bg-violet-50 flex items-center justify-center">
+                            <svg class="w-4 h-4 text-violet-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                                stroke-width="2">
+                                <path
+                                    d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
+                                    stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                        </div>
+                        <h3 class="font-semibold text-navy-700 text-sm">Coverage Assessment</h3>
+                    </div>
+                    <p id="coverage-text" class="text-sm text-navy-500 leading-relaxed"></p>
+                </div>
+            </div>
+
+            <!-- Flagged Clauses Table -->
+            <div class="result-card bg-white rounded-2xl border border-navy-100 shadow-sm mb-8 overflow-hidden">
+                <div class="px-6 py-4 border-b border-navy-100 flex items-center justify-between">
+                    <h3 class="font-semibold text-navy-700">
+                        <svg class="w-4 h-4 inline-block mr-1.5 text-amber-500 -mt-0.5" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor" stroke-width="2">
+                            <path
+                                d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4.5c-.77-.833-2.694-.833-3.464 0L3.34 16.5c-.77.833.192 2.5 1.732 2.5z"
+                                stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                        Flagged Clauses
+                    </h3>
+                </div>
+                <div id="flagged-clauses-container" class="divide-y divide-navy-50">
+                    <!-- Populated by JS -->
+                </div>
+                <div id="no-flagged" class="hidden px-6 py-8 text-center">
+                    <svg class="w-10 h-10 mx-auto text-emerald-300 mb-3" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor" stroke-width="1.5">
+                        <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                    </svg>
+                    <p class="text-navy-500 font-medium">No problematic clauses found</p>
+                    <p class="text-navy-400 text-sm">The document appears to be fair and compliant</p>
+                </div>
+            </div>
+
+            <!-- Analyzed Sections Accordion -->
+            <div class="result-card bg-white rounded-2xl border border-navy-100 shadow-sm mb-8 overflow-hidden">
+                <div class="px-6 py-4 border-b border-navy-100">
+                    <h3 class="font-semibold text-navy-700">
+                        <svg class="w-4 h-4 inline-block mr-1.5 text-trust-500 -mt-0.5" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor" stroke-width="2">
+                            <path
+                                d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"
+                                stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                        Analyzed Sections
+                    </h3>
+                </div>
+                <div id="sections-accordion" class="divide-y divide-navy-50">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+
+            <!-- New Analysis Button -->
+            <div class="text-center mb-8">
+                <button id="new-analysis-btn"
+                    class="px-8 py-3 bg-white border-2 border-navy-200 hover:border-trust-400 text-navy-700 hover:text-trust-600 font-semibold rounded-xl transition-all duration-300 hover:shadow-md">
+                    ← Analyze Another Document
+                </button>
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- ==================== FOOTER ==================== -->
+    <footer class="border-t border-navy-100 bg-navy-900 text-navy-300">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 py-8 text-center">
+            <div class="flex items-center justify-center gap-2 mb-3">
+                <svg class="w-6 h-6 text-trust-400" viewBox="0 0 40 40" fill="none">
+                    <path d="M20 3L5 10V19C5 28.94 11.4 38.22 20 40C28.6 38.22 35 28.94 35 19V10L20 3Z"
+                        fill="currentColor" fill-opacity="0.15" stroke="currentColor" stroke-width="2"
+                        stroke-linejoin="round" />
+                    <path d="M15 20L18.5 23.5L26 16" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                </svg>
+                <span class="font-bold text-white text-sm">Insurance Document Analyzer</span>
+            </div>
+            <p class="text-navy-400 text-sm">
+                Built with <strong class="text-navy-300">FastAPI</strong> · <strong class="text-navy-300">FAISS</strong>
+                · <strong class="text-navy-300">Groq LLM</strong> · <strong class="text-navy-300">Tesseract OCR</strong>
+            </p>
+            <p class="text-navy-500 text-xs mt-2">AI-Powered Compliance Assessment · Made in India</p>
+        </div>
+    </footer>
+
+    <!-- App Logic -->
+    <script src="app.js"></script>
+</body>
+
+</html>

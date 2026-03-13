@@ -10,52 +10,57 @@ def split_into_sections(text: str) -> List[str]:
     :return: Description
     :rtype: List[str]
 
-    split document text into sections based on headings commonly found 
-    in motor insurances.
-    Best use case is in this scenario because here
-    splitting is not like normal paragraphs and should be based on headings that are common.
+    split document text into sections based on ALL-CAPS headings commonly found 
+    in motor insurance documents.
+    Case-sensitive matching ensures mid-sentence words like "coverage" or
+    "Third Party" do NOT trigger a split — only true headings do.
     """
 
-    # common headings found 
+    # ALL-CAPS headings found in typical motor insurance documents
 
     section_patterns=[
-        r"policy\s+details",
-        r"policy\s+period",
-        r"insured\s+details",
-        r"veichle\s+deails",
-        r"coverage",
-        r"own\s+damage",
-        r"third\s+party",
-        r"premium\s+breakup",
-        r"idv",
-        r"exclusions",
-        r"terms\s+and\s+conditions",
-        r"limitations",
-        r"cancellation",
-        r"renewal",
-        r"claim\s+procedure",
-        r"grievance"
+        r"POLICY\s+DETAILS",
+        r"POLICY\s+PERIOD",
+        r"INSURED\s+DETAILS",
+        r"VEHICLE\s+DETAILS",
+        r"COVERAGE",
+        r"OWN\s+DAMAGE",
+        r"THIRD\s+PARTY",
+        r"PREMIUM\s+BREAKUP",
+        r"IDV",
+        r"EXCLUSIONS",
+        r"TERMS\s+AND\s+CONDITIONS",
+        r"LIMITATIONS",
+        r"CANCELLATION",
+        r"RENEWAL",
+        r"CLAIM\s+PROCEDURE",
+        r"GRIEVANCE"
     ]
 
-    # this is a regex pattern that will split  when a section keyword appears
+    # this is a regex pattern that will split when a section keyword appears
+    # NO re.IGNORECASE — we only match ALL-CAPS headings
 
     pattern="(" + "|".join(section_patterns) + ")"
-    splits=re.split(pattern,text, flags=re.IGNORECASE)
+    splits=re.split(pattern, text)
 
     sections=[]
     buffer=""
 
     for part in splits:
-        if part.strip().lower() in [p.replace("\\s+"," ") for p in section_patterns]:
+        stripped = part.strip()
+        # Check if this part matches any section pattern (case-sensitive)
+        is_section = any(re.fullmatch(p, stripped) for p in section_patterns)
+        
+        if is_section:
             if buffer.strip():
                 sections.append(buffer.strip())
             buffer=part
-
         else:
             buffer+=" "+part
-        
-        if buffer.strip():
-            sections.append(buffer.strip())
+    
+    # Append the last buffer if it exists
+    if buffer.strip():
+        sections.append(buffer.strip())
 
     return sections
 

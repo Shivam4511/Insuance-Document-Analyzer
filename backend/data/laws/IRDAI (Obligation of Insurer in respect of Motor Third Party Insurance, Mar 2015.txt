@@ -1,0 +1,147 @@
+
+--- Page 1 ---
+
+Reference No.:--
+Date:19/03/2015
+ 
+Title:Exposure Draft
+IRDAI (Obligation of Insurer in respect of Motor Third Party Insurance Business) Regulations, 2015
+"Comments on the Exposure draft can be forwarded to: suresh [at] irda [dot] gov [dot] in on or before 25th
+March, 2015"
+INTRODUCTION:
+The Insurance Laws (Amendment) Ordinance, 2014 has introduced section 32D regarding the percentage of third party
+motor insurance that needs to be underwritten by each insurer. The text of this newly introduced section is as follows:
+“32D. Every insurer carrying on general insurance business shall, after the commencement of the Insurance Laws
+(Amendment) Ordinance, 2014, underwrite such minimum percentage of insurance business in third party risks of
+motor vehicles as may be specified by the regulations:
+ 
+Provided that the Authority may, by regulations, exempt any insurer who is primarily engaged in the business of
+health, re-insurance, agriculture, export credit guarantee, from the application of this section.".
+ 
+ 
+Obligation of insurer in respect of Motor Third Party Insurance Business:  
+The Motor Vehicles Act, 1988 provides for compulsory motor third party insurance for vehicles plying on the road.
+However, there was no provision either in the MV Act or the Insurance Act regarding the specific obligations of an
+insurer towards underwriting the motor third party risks.
+Under such circumstances, the Authority in order to ensure that there are no supply side constraints in the market had
+adopted initiatives like creation of Motor TP pool (closed now), Declined Risk Pool (currently in existence) besides
+taking regulatory action where necessary. Also, it was prescribed that no insurer shall refuse Motor Third party cover to
+any individual/entity who approaches them.
+It is expected that the obligation of the insurers to underwrite Motor TP risks determined based on a broad approach
+taking into consideration several relevant factors would ensure equitable distribution of this responsibility.
+Taking into account the experience gained so far and factoring in various parameters like Total Market Share of the
+insurer and insurer’s market share of Motor Insurance, the obligations of insurers to underwrite Motor TP risks are
+proposed to be mandated.
+Now, as per the mandate given in the Insurance Act, 1938 as amended by The Insurance Laws (Amendment) Ordinance,
+2014, the Authority had initiated framing of draft regulations prescribing the obligations of the insurers in meeting the
+Motor TP coverage needs of the country.
+The draft regulations are as Annexed.
+ 
+
+
+--- Page 2 ---
+
+ 
+ 
+Insurance Regulatory and Development Authority of India (Obligation of Insurer in respect of Motor Third
+Party Insurance Business) Regulations, 2015
+ 
+IRDA/NL/MTP/Reg/     / 2015
+ 
+In exercise of the powers conferred by section 114A of the Insurance Act, 1938 (4 of 1938), as amended from time to
+time, read with sections 14 and 26 of the Insurance Regulatory and Development Authority Act, 1999 (41 of 1999) and
+Section 32D of Insurance Act, 1938, as amended from time to time, the Authority in consultation with the Insurance
+Advisory Committee, hereby makes the following regulations, namely:-
+ 
+Short Title and Commencement of the Regulations
+ 
+1.    (a) These Regulations may be called the Insurance Regulatory and Development Authority of India (Obligation
+of Insurer in respect of Motor Third Party Insurance Business) Regulations, 2015
+(b) These shall come into force on the date of their publication in the Official Gazette
+ 
+Definitions
+ 
+(2) In these regulations, unless the context otherwise requires, -
+(a) "Act" means the Insurance Act, 1938 (4 of 1938), as amended from time to time;
+(b)  “Authority” means the Insurance Regulatory and Development Authority of India established under the
+provisions of Section 3 of the Insurance Regulatory and Development Authority Act, 1999 (41 of 1999)
+(c) “Insurer” means the insurance companies registered with the IRDAI and licensed to underwrite direct motor
+insurance business in India
+(d) “Motor Third Party Insurance Business” consists of the motor third party insurance business in respect of both,
+the liability only policies as well as the package policies issued in motor portfolio
+(e)  “New Insurer” means an insurer which has started its business operations during the immediate preceding
+financial year of the financial year for which obligations in respect of motor third party insurance business are to
+be fixed
+ 
+Obligations
+ 
+(3)  Every insurer, for the purpose of Section 32D of the Insurance Act, 1938, during a financial year, shall
+underwrite such minimum percentage of the 90 % of the overall motor third party insurance business premium
+of the industry for the immediate preceding financial year as described in Para (4) below
+(4)  The minimum percentage so decided shall be equal to the simple average of insurer’s share in total gross
+premium of the industry and that in total motor insurance premium of the industry, both in the immediate
+preceding financial year
+ 
+ 
+ 
+Exceptions
+ 
+(5) The new insurer writing motor insurance business licensed to underwrite motor insurance for the first time shall
+be exempted from the application of the obligatory requirement during first two financial years of its operations
+including the financial year in which its operations are started
+(6) Such insurer shall also be excluded from the calculations for determining the minimum obligatory requirements
+for other existing insurers for such period till which the minimum obligatory requirements are not applicable to
+that insurer
+ 
+Submissions
+
+
+--- Page 3 ---
+
+ 
+(7) Every insurer shall submit the financial returns to the IRDAI for every quarter of the financial year within forty
+five days of the end of the quarter as per the Schedule – MTP –A
+ 
+Schedule – MTP- A (Motor Third Party Insurance Business)
+ 
+(i)            Name of the Insurer:
+(ii)          Registration No. and Date of Registration with the IRDAI:
+(iii)         Gross Direct Premium Income for the FY (Preceding FY):
+(iv)         Motor Third Party Insurance Business Premium for the FY (Preceding FY):
+(v)          Statement Period: Quarter ending __________
+ 
+Items
+Amount (Rs)
+For the Quarter
+Till the Quarter
+Motor Third Party Insurance Business
+Premium in respect of liability only
+policies (A)
+ 
+ 
+Motor Third Party Insurance Business
+Premium in respect of package policies (B)
+ 
+ 
+Total 
+Motor 
+Third 
+Party 
+Insurance
+Business Premium in respect of both types
+of policies (A+B)
+ 
+ 
+Total Motor Own damage Insurance
+Business Premium
+ 
+ 
+Total Gross Direct Premium Income
+ 
+ 
+ 
+No refusal to Accept the Risk
+ 
+(8) The Regulations (3) and (4) stipulate just the minimum obligation of the insurer in respect of motor third party
+insurance business. Notwithstanding this, at no instance the insurer shall refuse to underwrite the “liability only”
+motor policy covering motor third party insurance risk coming to its office (s).
