@@ -19,3 +19,6 @@ Thumbs.db
 
 # FAISS / cache
 *.index
+
+# Test Samples
+TEST_SAMPLE*.txt
